@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 
 export const Route = createFileRoute("/dashboard")({
@@ -8,13 +8,5 @@ export const Route = createFileRoute("/dashboard")({
       { name: "description", content: "Operator control plane for x402/sol MCP servers." },
     ],
   }),
-  component: DashboardLayout,
+  component: DashboardShell,
 });
-
-function DashboardLayout() {
-  return (
-    <DashboardShell>
-      <Outlet />
-    </DashboardShell>
-  );
-}
