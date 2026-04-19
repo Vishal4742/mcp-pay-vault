@@ -5,6 +5,7 @@ import { JsonViewer } from "@/components/JsonViewer";
 import { requests } from "@/lib/mock/data";
 import { fmtRelative, fmtUsdc, truncate } from "@/lib/api";
 import { cn } from "@/lib/utils";
+import type { PaymentRequest, TimelineEvent } from "@/lib/mock/types";
 
 export const Route = createFileRoute("/dashboard/requests/$requestId")({
   head: ({ params }) => ({
@@ -34,7 +35,7 @@ export const Route = createFileRoute("/dashboard/requests/$requestId")({
 });
 
 function RequestDetail() {
-  const req = Route.useLoaderData();
+  const req = Route.useLoaderData() as PaymentRequest;
 
   return (
     <div className="space-y-10">
@@ -61,7 +62,7 @@ function RequestDetail() {
         <section className="lg:col-span-2">
           <MicroLabel className="mb-6">Timeline</MicroLabel>
           <ol className="relative">
-            {req.timeline.map((ev, i) => {
+            {req.timeline.map((ev: TimelineEvent, i: number) => {
               const isLast = i === req.timeline.length - 1;
               const failed = ev.status === "failed";
               return (
